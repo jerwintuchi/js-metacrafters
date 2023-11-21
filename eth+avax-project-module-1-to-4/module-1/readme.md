@@ -55,7 +55,7 @@ To utilize this contract, you can follow these steps:
 3. **Compilation:**
    - Go to the "Solidity Compiler" tab in Remix.
    - Select the correct compiler version for the contract.
-   - Compile the contract by clicking on "Compile [ContractName]" button.
+   - Compile the contract by clicking on "Compile **Auction.sol** " button.
 
 4. **Deployment:**
    - Go to the "Deploy & Run Transactions" tab in Remix.
