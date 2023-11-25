@@ -51,10 +51,11 @@ To run the project locally, follow these steps:
 
 ## Smart Contract Development and Deployment
 
-1. **Make 3 terminals inside VS** click the **`+`** on terminal tab, or press **`Ctrl + Shift + ``**
+1. **Make 3 terminals inside VS** click the **`+`** on terminal tab, or press **`Ctrl + Shift + ``** and at each separate terminal copy paste the following commands at **steps 3 to 5**
 2. **Smart Contract Development:** Modify `Assessment.sol` in the `contracts` directory for contract logic.
 3. **Setup the Smart Contract:** Run **`npx hardhat node`** to start a local Ethereum node.
 4. **Deploy Contract:** Use **`npx hardhat run --network localhost scripts/deploy.js`** to deploy the contract to a local network.
+5. **Start the Development Server:** Run **`npm run dev`**
 
 The project will be accessible at [http://localhost:3000/](http://localhost:3000/).
 
