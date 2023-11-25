@@ -7,7 +7,6 @@ contract Assessment {
    
    event Deposit(uint256 amount);
    event Withdraw(uint256 amount);
-   event Transfer(address indexed recipient, uint256 amount);
    event Burn(uint256 amount);
 
    constructor(uint initBalance) payable {
@@ -44,17 +43,6 @@ contract Assessment {
        emit Withdraw(_withdrawAmount);
    }
 
-   function transfer(address _recipient, uint256 _amount) public {
-       require(msg.sender == owner, "You are not the owner of this account");
-       require(_recipient != address(0), "Invalid recipient address");
-       require(_amount <= balance, "Insufficient balance");
-
-       balance -= _amount;
-       payable(_recipient).transfer(_amount);
-
-       emit Transfer(_recipient, _amount);
-   }
-
    function burn(uint256 _burnAmount) public {
        require(msg.sender == owner, "You are not the owner of this account");
        require(_burnAmount <= balance, "Insufficient balance");
@@ -64,4 +52,3 @@ contract Assessment {
        emit Burn(_burnAmount);
    }
 }
-
