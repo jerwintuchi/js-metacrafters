@@ -20,8 +20,8 @@ This contract provides the following functionalities:
 
 ### constructor
 
-- **Arguments**: `name`, `symbol`, `initialSupply`
-- **Description**: Initializes the token with the given `name`, `symbol`, and `initialSupply` and assigns the deployer as the token owner.
+- **Arguments**:  `initialSupply`
+- **Description**: Initializes the token with the given `initialSupply` and assigns the deployer as the token owner.
 
 ### mintTokens
 
@@ -42,7 +42,7 @@ This contract provides the following functionalities:
 
 ### Deployment
 
-Deploy the `JBL` contract by specifying the token `name`, `symbol`, and `initialSupply` using a Solidity development environment or a tool like Remix.
+Deploy the `JBL` contract by using a Solidity development environment or a tool like Remix.
 
 ### Interacting with the Contract
 
