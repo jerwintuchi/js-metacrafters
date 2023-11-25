@@ -1,6 +1,9 @@
 # Fullstack Ethereum Project with React, Hardhat, and ethers.js
 
-This is a fullstack project utilizing React.js for the front end and Hardhat for Ethereum development, integrating an Ethereum wallet using ethers.js.
+This is a fullstack project utilizing React.js for the front end and Hardhat for Ethereum development, integrating an Ethereum wallet using ethers.js that allows: 
+   - Deposit: Allows users to deposit Ether into the contract.
+   - Withdraw: Enables users to withdraw Ether from the contract.
+   - Burn: Provides the functionality to burn Ether from the contract.
 
 ## Project Structure
 
