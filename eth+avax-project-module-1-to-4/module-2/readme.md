@@ -1,4 +1,4 @@
-# Fullstack Ethereum Project with React, Hardhat, and ethers.js
+# ETH Manager (Fullstack Ethereum Project with React, Hardhat, and ethers.js)
 
 This is a fullstack project utilizing React.js for the front end and Hardhat for Ethereum development, integrating an Ethereum wallet using ethers.js that allows: 
    - Deposit: Allows users to deposit Ether into the contract.
