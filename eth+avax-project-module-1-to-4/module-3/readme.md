@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `MyToken` contract is an ERC20 token standard implementation that allows users to create and manage tokens on the Ethereum blockchain. It extends the functionalities of the `ERC20` contract from OpenZeppelin Contracts library.
+The `JBL` contract is an ERC20 token standard implementation that allows users to create and manage tokens on the Ethereum blockchain. It extends the functionalities of the `ERC20` contract from OpenZeppelin Contracts library.
 
 This contract provides the following functionalities:
 
