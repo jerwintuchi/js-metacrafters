@@ -9,11 +9,15 @@ export default function HomePage() {
   const [balance, setBalance] = useState(undefined);
   const [showAccount, setShowAccount] = useState(true);
   const [transactionAmount, setTransactionAmount] = useState(1);
+  const [recipientAddress, setRecipientAddress] = useState('');
   
   const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
   const atmABI = atm_abi.abi;
   const ethLogo = "https://www.pngall.com/wp-content/uploads/10/Ethereum-Logo-PNG-HD-Image.png"
   
+  const handleRecipientChange = (e) => {
+    setRecipientAddress(e.target.value);
+  };
 
   const handleAmountChange = (e) => {
     if (e.target.value <0) {
@@ -139,6 +143,24 @@ export default function HomePage() {
     }
   }; 
 
+  const transfer = async () => {
+    try {
+      if (atm && isValidTransactionAmount()) {
+        let tx = await atm.transfer(recipientAddress, ethers.utils.parseEther(transactionAmount.toString()));
+        await tx.wait();
+        getBalance();
+      } else {
+        console.log('Invalid transaction amount or insufficient balance');
+      }
+    } catch (error) {
+      if (error.code === 'ACTION_REJECTED') {
+        console.log('User rejected the transfer transaction.');
+      } else {
+        console.error('Unhandled error:', error);
+      }
+    }
+  }
+
   const inputStyle = {
     padding: '8px',
     margin: '10px',
@@ -151,6 +173,21 @@ export default function HomePage() {
     maxWidth: '30px',
     padding: '5px',
   };
+
+  const inputStyle2 = {
+    padding: '8px',
+    margin: '10px',
+    borderRadius: '5px',
+    border: '1px solid #FFD700',
+    backgroundColor: '#0000',
+    color: '#fff',
+    fontSize: '16px',
+    outline: 'none',
+    maxWidth: '50x',
+    width: '90px',
+    padding: '5px',
+  };
+
 
   // Styling with animations and background color
   const containerStyle = {
@@ -224,6 +261,7 @@ export default function HomePage() {
           style={inputStyle}
         />
         </div>
+        <div></div>
         <button style={buttonStyle} onClick={deposit}>Deposit {transactionAmount} ETH</button>
         <button style={buttonStyle} onClick={withdraw}>Withdraw {transactionAmount} ETH</button>
         <button style={buttonStyle} onClick={burn}>Burn {transactionAmount} ETH</button>
@@ -238,7 +276,7 @@ export default function HomePage() {
   return (
     <main style={containerStyle} className="container">
       <header>
-        <h1 style={{ color: "#ffffff" }}>Welcome to the Metacrafters!</h1>
+        <h1 style={{ color: "#ffffff" }}>Welcome to ETH Manager!</h1>
       </header>
       <div>
         {account && (
