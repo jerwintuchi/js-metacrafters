@@ -55,9 +55,9 @@ To run the project locally, follow these steps:
 
 The project will be accessible at [http://localhost:3000/](http://localhost:3000/).
 
-## Contributors
+## Author
 
-- [@jerwintuchi](https://github.com/jerwintuchi)
+[@jerwintuchi](https://github.com/jerwintuchi)
 
 ## License
 
