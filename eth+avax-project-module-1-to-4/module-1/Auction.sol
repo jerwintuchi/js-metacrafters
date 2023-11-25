@@ -9,6 +9,7 @@ contract Auction {
     bool public auctionEnded;
     uint256 public itemId;
     uint256 public previousHighestBid;
+    uint256 public startingPrice;
 
     mapping(address => string) public itemOwners;
     mapping(address => uint256) public currentBid;
@@ -16,15 +17,17 @@ contract Auction {
     mapping(address => uint256) public userBalances;
 
     event PreviousBidAmount(uint256 previousBid);
-    event RefundStatus(bool success);
+    event RefundStatus(address recipient, uint256 amount);
     event ItemTransferred(address newOwner);
+    event EtherReceived(address sender, uint256 amount);
 
-    constructor(uint256 _duration, string memory _item, uint256 _itemId) {
+    constructor(uint256 _biddingDuration, string memory _item, uint256 _startingPrice, uint256 _itemId) {
         original_owner = msg.sender;
         itemOwners[original_owner] = _item;
         isItemOwner[original_owner] = true;
+        startingPrice = _startingPrice;
         itemId = _itemId;
-        auctionEndTime = block.timestamp + _duration;
+        auctionEndTime = block.timestamp + _biddingDuration;
     }
 
     modifier onlyOwner() {
@@ -45,7 +48,11 @@ contract Auction {
     modifier hasBalance(){
         require(msg.sender.balance > 0 , "Account has insufficient balance");
         _;
-    }     
+    }
+
+    receive() external payable {
+        emit EtherReceived(msg.sender, msg.value);
+    }
 
     function getUserBalance(address _user) external view returns (uint256) {
         return userBalances[_user];
@@ -56,27 +63,27 @@ contract Auction {
     }
 
     function placeBid(uint256 _bid) external payable auctionNotEnded notItemOwner {
-        assert(_bid > 100); // assume a case where the bid amount must not be less than 100
+        assert(_bid > startingPrice); // the bid always be higher than the starting price
         require(_bid > highestBid, "Bid must be higher than current highest bid");
+        require(!auctionEnded, "Auction already ended");
+
         address previousHighestBidder = highestBidder;
         uint256 previousHighestBidAmount = highestBid;
-        
+
         if (msg.sender.balance <= _bid) {
             revert("Insufficient balance to place the bid");
         }
 
         if (previousHighestBidder != address(0)) {
             updateUserBalance(previousHighestBidder, userBalances[previousHighestBidder] + previousHighestBidAmount);
-            emit RefundStatus(true);
+            emit RefundStatus(previousHighestBidder, previousHighestBidAmount);
         }
-
 
         previousHighestBid = highestBid;
         highestBidder = msg.sender;
         highestBid = _bid;
         updateUserBalance(msg.sender, msg.sender.balance - _bid);
         currentBid[msg.sender] = _bid;
-
 
         emit PreviousBidAmount(previousHighestBid);
     }
@@ -98,7 +105,7 @@ contract Auction {
             auctionEnded = true;
             transferItemToWinner();
         }
-}
+    }
 
     function transferItemToWinner() internal {
         require(itemId != 0, "No item to transfer");
