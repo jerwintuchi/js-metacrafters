@@ -3,6 +3,12 @@ pragma solidity ^0.8.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.0.0/contracts/token/ERC20/ERC20.sol";
 
+/*
+    Functionality
+    Only contract owner should be able to mint tokens
+    Any user can transfer tokens
+    Any user can burn tokens
+*/
 contract JBL is ERC20 {
    address public tokenOwner;
 
@@ -19,6 +25,10 @@ contract JBL is ERC20 {
    function burnTokens(uint256 amount) public {
        require(balanceOf(msg.sender) >= amount, "Insufficient balance for burning");
        _burn(msg.sender, amount);
+   }
+
+   function checkBalanceOfRecipient() public view returns (uint256) {
+        return balanceOf(msg.sender); //for easier tracking of balance for recipient
    }
    
    function transferTokens(address to, uint256 amount) public {
