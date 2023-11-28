@@ -9,6 +9,7 @@ This contract provides the following functionalities:
 - **Token Deployment**: Enables the deployment of a new ERC20 token with specified initial supply, name, and symbol.
 - **Mint Tokens**: Allows the owner of the token to mint new tokens and assign them to a specified address.
 - **Burn Tokens**: Permits token holders to burn a certain amount of their tokens, effectively reducing the total supply.
+- **Check Balance of Recipient**: Checks the balance of a specified address. (For debugging)
 - **Transfer Tokens**: Facilitates the transfer of tokens between different addresses.
 
 ## Contract Details
