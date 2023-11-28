@@ -143,23 +143,6 @@ export default function HomePage() {
     }
   }; 
 
-  const transfer = async () => {
-    try {
-      if (atm && isValidTransactionAmount()) {
-        let tx = await atm.transfer(recipientAddress, ethers.utils.parseEther(transactionAmount.toString()));
-        await tx.wait();
-        getBalance();
-      } else {
-        console.log('Invalid transaction amount or insufficient balance');
-      }
-    } catch (error) {
-      if (error.code === 'ACTION_REJECTED') {
-        console.log('User rejected the transfer transaction.');
-      } else {
-        console.error('Unhandled error:', error);
-      }
-    }
-  }
 
   const inputStyle = {
     padding: '8px',
