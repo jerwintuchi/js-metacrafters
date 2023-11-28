@@ -27,8 +27,8 @@ contract JBL is ERC20 {
        _burn(msg.sender, amount);
    }
 
-   function checkBalanceOfRecipient() public view returns (uint256) {
-        return balanceOf(msg.sender); //for easier tracking of balance for recipient
+   function checkBalanceOfRecipient(address _recipient) public view returns (uint256) {
+        return balanceOf(_recipient); //for easier tracking of balance for recipient
    }
    
    function transferTokens(address to, uint256 amount) public {
