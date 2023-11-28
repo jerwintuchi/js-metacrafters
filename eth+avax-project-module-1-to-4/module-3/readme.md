@@ -33,10 +33,13 @@ This contract provides the following functionalities:
 - **Arguments**: `amount`
 - **Description**: Burns `amount` tokens from the caller's balance. The caller must have a balance greater than or equal to the specified amount.
 
-### transferTokens
+### checkBalanceOfRecipient
+**Arguments:** `_recipient` (Address)
+**Returns:** Returns the balance of the specified address `_recipient` (Token balance)
 
-- **Arguments**: `to`, `amount`
-- **Description**: Transfers `amount` tokens from the caller's address to the specified `to` address. The caller must have a balance greater than or equal to the specified amount.
+**Description:** 
+Retrieves the token balance associated with the specified recipient address. This function allows easy tracking of the token balance for the given recipient by fetching the balance associated with the provided address.
+
 
 ## Usage
 
